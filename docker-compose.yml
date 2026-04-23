@@ -1,0 +1,46 @@
+services:
+  livre-service:
+    build: ./livre-service
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./livre-service:/app
+      - /app/node_modules   # ✅ مهم
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/biblio
+      - PORT=3001
+
+  emprunt-service:
+    build: ./emprunt-service
+    ports:
+      - "3002:3002"
+    volumes:
+      - ./emprunt-service:/app
+      - /app/node_modules   # ✅ مهم
+    depends_on:
+      - livre-service
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/biblio
+      - PORT=3002
+      - LIVRE_SERVICE_URL=http://livre-service:3001
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules   # ✅ مهم
+    depends_on:
+      - livre-service
+      - emprunt-service
+
+  mongo:
+    image: mongo:6
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+volumes:
+  mongo_data:

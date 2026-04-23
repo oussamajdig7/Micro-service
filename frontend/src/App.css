@@ -1,0 +1,350 @@
+/* ═══════════════════════════════════════════
+   App.css — MicroLivres Frontend Styles
+   Targets the single-page App.jsx layout
+   ═══════════════════════════════════════════ */
+
+/* ─── Page Title ─── */
+h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  background: linear-gradient(135deg, #c7d2fe 0%, #818cf8 50%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─── Section Headings ─── */
+h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 2.5rem 0 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+h2::before {
+  content: '';
+  display: inline-block;
+  width: 4px;
+  height: 20px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+/* ─── Cards (glassmorphism) ─── */
+.card {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-md);
+}
+
+/* ─── Form Section ─── */
+.form-section {
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem 2rem;
+  margin-bottom: 1rem;
+}
+
+/* ─── Inputs ─── */
+input,
+select {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: var(--bg-input);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-family: inherit;
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  outline: none;
+}
+
+input::placeholder {
+  color: var(--text-muted);
+}
+
+input:focus,
+select:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+
+select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%2394a3b8' viewBox='0 0 16 16'%3E%3Cpath d='M4.646 6.646a.5.5 0 0 1 .708 0L8 9.293l2.646-2.647a.5.5 0 0 1 .708.708l-3 3a.5.5 0 0 1-.708 0l-3-3a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+  padding-right: 2.5rem;
+  cursor: pointer;
+}
+
+select option {
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+/* ─── Buttons ─── */
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 0.7rem 1.4rem;
+  font-family: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+  /* Primary by default */
+  background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+  color: #fff;
+  box-shadow: 0 4px 14px var(--accent-glow);
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-glow), var(--shadow-sm);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+/* Ripple micro-animation */
+button::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(255,255,255,0.25) 10%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+button:active::after {
+  opacity: 1;
+}
+
+/* Return button (smaller / success) */
+button.btn-return {
+  background: linear-gradient(135deg, var(--success), #059669);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
+  padding: 0.45rem 1rem;
+  font-size: 0.8rem;
+  margin-left: 0.75rem;
+}
+
+button.btn-return:hover {
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.4), var(--shadow-sm);
+}
+
+/* ─── Book List Items ─── */
+.book-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.75rem;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  animation: fadeSlideUp 0.35s ease both;
+}
+
+.book-item:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-sm);
+}
+
+.book-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.book-title {
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.book-author {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* ─── Badges (Disponible / Non disponible) ─── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.badge-available {
+  background: var(--success-bg);
+  color: var(--success);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.badge-unavailable {
+  background: var(--danger-bg);
+  color: var(--danger);
+  border: 1px solid rgba(244, 63, 94, 0.25);
+}
+
+/* ─── Emprunt List Items ─── */
+.emprunt-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  background: var(--bg-card);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 1rem 1.25rem;
+  margin-bottom: 0.75rem;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+  animation: fadeSlideUp 0.35s ease both;
+}
+
+.emprunt-item:hover {
+  transform: translateY(-2px);
+  border-color: var(--border-hover);
+  box-shadow: var(--shadow-sm);
+}
+
+.emprunt-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.emprunt-user {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.emprunt-book {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-family: 'Courier New', monospace;
+}
+
+.emprunt-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* ─── Status badges for emprunts ─── */
+.badge-returned {
+  background: var(--success-bg);
+  color: var(--success);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.badge-pending {
+  background: rgba(245, 158, 11, 0.12);
+  color: var(--warning);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+/* ─── Empty state ─── */
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+/* ─── Section divider ─── */
+.divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 2rem 0;
+}
+
+/* ─── Animations ─── */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Stagger animations for list items */
+.book-item:nth-child(1),
+.emprunt-item:nth-child(1) { animation-delay: 0ms; }
+.book-item:nth-child(2),
+.emprunt-item:nth-child(2) { animation-delay: 50ms; }
+.book-item:nth-child(3),
+.emprunt-item:nth-child(3) { animation-delay: 100ms; }
+.book-item:nth-child(4),
+.emprunt-item:nth-child(4) { animation-delay: 150ms; }
+.book-item:nth-child(5),
+.emprunt-item:nth-child(5) { animation-delay: 200ms; }
+.book-item:nth-child(6),
+.emprunt-item:nth-child(6) { animation-delay: 250ms; }
+
+/* ─── Responsive ─── */
+@media (max-width: 640px) {
+  h1 {
+    font-size: 1.75rem;
+  }
+
+  .book-item,
+  .emprunt-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  input,
+  select,
+  button {
+    width: 100%;
+  }
+}
